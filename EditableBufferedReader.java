@@ -4,13 +4,14 @@ import java.io.InputStreamReader;
 
 class EditableBufferedReader extends BufferedReader {
 
-    static final int DRETA
-    static final int ESQUERRA
-    static final int INICI
-    static final int FINAL
-    static final int DELETE //Borrar esquerra
-    static final int SUPRIMIR //Borrar dreta
-    static final int INSERT
+    static final int DRETA = 67;
+    static final int ESQUERRA = 68;
+    static final int INICI = 72;
+    static final int FINAL = 70;
+    static final int DELETE = 51;//Borrar dreta
+    static final int BACKSPACE = 127;   //Borrar esquerra
+    static final int INSERT = 50;
+    static final int ESC = 27;
 
     EditableBufferedReader(InputStreamReader in){
         super(in);
