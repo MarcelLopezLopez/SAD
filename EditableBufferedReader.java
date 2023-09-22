@@ -1,21 +1,22 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 class EditableBufferedReader extends BufferedReader {
     EditableBufferedReader(InputStreamReader in){
         super(in);
     }
-    public void setRaw(){
+    public void setRaw() throws IOException {
 
     }
-    public void unsetRaw(){
+    public void unsetRaw() throws IOException {
 
     }
-    public int read(){
+    public int read() throws IOException {
         int lectura = 0;
         return lectura;
     }
-    public String readLine(){
+    public String readLine() throws IOException {
         String linea = null;
         return linea;
     }
