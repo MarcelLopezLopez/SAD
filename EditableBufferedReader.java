@@ -1,19 +1,22 @@
 import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 class EditableBufferedReader extends BufferedReader {
-    EditableBufferedReader(){
+    EditableBufferedReader(InputStreamReader in){
         super(in);
     }
-    void setRaw(){
+    public void setRaw(){
 
     }
-    void unsetRaw(){
+    public void unsetRaw(){
 
     }
-    void read(){
-
+    public int read(){
+        int lectura = 0;
+        return lectura;
     }
-    void readLine(){
-        
+    public String readLine(){
+        String linea = null;
+        return linea;
     }
 }
