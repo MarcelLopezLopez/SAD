@@ -3,6 +3,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 class EditableBufferedReader extends BufferedReader {
+
+    static final int DRETA
+    static final int ESQUERRA
+    static final int INICI
+    static final int FINAL
+    static final int DELETE //Borrar esquerra
+    static final int SUPRIMIR //Borrar dreta
+    static final int INSERT
+
     EditableBufferedReader(InputStreamReader in){
         super(in);
     }
@@ -12,7 +21,7 @@ class EditableBufferedReader extends BufferedReader {
         String [] modeRaw = {"/bin/sh", "-c", "stty raw </dev/tty"};
         try {
             //getRuntime().exec() serveix per poder executar la linea de comandes
-            //waitFor() espera hasta que el subproceso terminal
+            //waitFor() espera hasta que el subproceso termine
             Runtime.getRuntime().exec(modeRaw).waitFor();  
         }catch (Exception e) {
             //Comuniquem l'error
@@ -25,7 +34,7 @@ class EditableBufferedReader extends BufferedReader {
         String[] modeCooked = {"/bin/sh", "-c", "stty cooked <dev/tty"};
         try{
             //getRuntime().exec() serveix per poder executar la linea de comandes
-            //waitFor() espera hasta que el subproceso terminal
+            //waitFor() espera hasta que el subproceso termine
             Runtime.getRuntime().exec(modeCooked).waitFor();
         } catch (IOException | InterruptedException e){
             //Comuniquem l'error
