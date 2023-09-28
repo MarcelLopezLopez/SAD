@@ -4,14 +4,20 @@ import java.io.InputStreamReader;
 
 class EditableBufferedReader extends BufferedReader {
 
-    static final int DRETA = 67;
-    static final int ESQUERRA = 68;
-    static final int INICI = 72;
-    static final int FINAL = 70;
-    static final int DELETE = 51;//Borrar dreta
-    static final int BACKSPACE = 127;   //Borrar esquerra
-    static final int INSERT = 50;
-    static final int ESC = 27;
+    static final int DRETA = 67; //La fletxa dreta es representa al terminal 
+    // com "^[[C", de tal manera que representarem DRETA com 'C'
+    static final int ESQUERRA = 68; //La fletxa esquerra es representa al 
+    // terminal com "^[[D", de tal manera que representarem ESQUERRA com 'D'
+    static final int INICI = 72; //Tecla inicio Printea ^[[H, utilitzarem la H
+    static final int FINAL = 70; //Tecla fin Printea ^[[F, utilitzarem la F
+    static final int DEL = 51; //Tecla supr Printea ^[[3~, utilitzarem el 3
+    static final int BPSK = 127; //Tecla <-- backspace, te numero en ASCII
+    static final int INSERT = 50; //Tecla insert Printea ^[[2~, utilitzarem el 2
+   
+    static final int VIRGULILLA = 126; //Útil per fer DEL e INSERT, ja que cal "~"
+    static final int ESC = 27; //Útil per fer les fletxes, ja que ens cal "^["
+    static final int CORXET = 91; //Útile per representar les fletxes ja que ens cal "["
+    
 
     EditableBufferedReader(InputStreamReader in){
         super(in);
@@ -45,6 +51,30 @@ class EditableBufferedReader extends BufferedReader {
 
     public int read() throws IOException {
         int lectura = 0;
+
+        //Llegim el caràcter amb la funció main de BufferedReader
+        lectura = super.read();
+        if(lectura == ESC){
+            lectura = super.read();
+            if(lectura == CORXET){
+                lectura = super.read();
+                switch(lectura){
+                    case DRETA:
+                        return 'DRETA';
+                    case ESQUERRA:
+                        return 'ESQUERRA';
+                    case 'INICIO':
+                        return 'HOME';
+                    case 'FINAL':
+                        return 'END';
+                    case 'INS'
+                        return 'COMMUTA';
+                    case 'DEL'
+                        return
+
+                }
+            }
+        }
         return lectura;
     }
     public String readLine() throws IOException {
