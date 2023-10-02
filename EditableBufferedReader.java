@@ -17,6 +17,16 @@ class EditableBufferedReader extends BufferedReader {
     static final int VIRGULILLA = 126; //Útil per fer DEL e INSERT, ja que cal "~"
     static final int ESC = 27; //Útil per fer les fletxes, ja que ens cal "^["
     static final int CORXET = 91; //Útile per representar les fletxes ja que ens cal "["
+
+    //Definim els valors a retornar per la funció read, escollim valors a partir del
+    //256, ja que son valors lliures a la taula ASCII, no definim BPSK, ja que es un 
+    //valor existent i el podem retornar a ell mateix
+    static final int RET_DRETA = 256;
+    static final int RET_ESQUERRA = 257;
+    static final int RET_INICI = 258;
+    static final int RET_FINAL = 259;
+    static final int RET_DEL = 260;
+    static final int RTE_INSERT = 261;
     
 
     EditableBufferedReader(InputStreamReader in){
@@ -61,23 +71,23 @@ class EditableBufferedReader extends BufferedReader {
                 lectura = super.read();
                 switch(lectura){
                     case DRETA:
-                        return 'DRETA';
+                        return RET_DRETA;
                     case ESQUERRA:
-                        return 'ESQUERRA';
+                        return RET_ESQUERRA;
                     case INICI:
-                        return 'HOME';
+                        return RET_INICI;
                     case FINAL:
-                        return 'END';
+                        return RET_FINAL;
                     case INSERT:
                         //Mirem si el car`zcter enviat és ~
-                        if(super.read() == VIRGUILLA){
-                            return 'COMMUTA';
+                        if(super.read() == VIRGULILLA){
+                            return RTE_INSERT;
                         }
                         return -1;
                     case DEL:
-                        //Mirem si el car`zcter enviat és ~
-                        if(super.read() == VIRGUILLA){
-                            return 'COMMUTA';
+                        //Mirem si el caràcter enviat és ~
+                        if(super.read() == VIRGULILLA){
+                            return RET_DEL;
                         }
                         return -1;
                     default:
@@ -87,7 +97,7 @@ class EditableBufferedReader extends BufferedReader {
             }
         //Especifiquem el cas del BPSK valor 127 (tecla espai)
         } else if (lectura == BPSK) {
-            return 'BPSK';
+            return BPSK;
         //Si s'introdueix un caràcter comú el retornem
         } else {
             return lectura;
