@@ -54,6 +54,7 @@ class EditableBufferedReader extends BufferedReader {
 
         //Llegim el caràcter amb la funció main de BufferedReader
         lectura = super.read();
+        //Mirem si els caràcters enviats són ^[[
         if(lectura == ESC){
             lectura = super.read();
             if(lectura == CORXET){
@@ -63,20 +64,38 @@ class EditableBufferedReader extends BufferedReader {
                         return 'DRETA';
                     case ESQUERRA:
                         return 'ESQUERRA';
-                    case 'INICIO':
+                    case INICI:
                         return 'HOME';
-                    case 'FINAL':
+                    case FINAL:
                         return 'END';
-                    case 'INS'
-                        return 'COMMUTA';
-                    case 'DEL'
-                        return
-
+                    case INSERT:
+                        //Mirem si el car`zcter enviat és ~
+                        if(super.read() == VIRGUILLA){
+                            return 'COMMUTA';
+                        }
+                        return -1;
+                    case DEL:
+                        //Mirem si el car`zcter enviat és ~
+                        if(super.read() == VIRGUILLA){
+                            return 'COMMUTA';
+                        }
+                        return -1;
+                    default:
+                        //Si l'usuari prem ^[[ i un caràcter desconegut no retornem
+                        return -1;
                 }
             }
+        //Especifiquem el cas del BPSK valor 127 (tecla espai)
+        } else if (lectura == BPSK) {
+            return 'BPSK';
+        //Si s'introdueix un caràcter comú el retornem
+        } else {
+            return lectura;
         }
-        return lectura;
+        //Per si hi hagués algun error o cas no contemplat
+        return -1;
     }
+
     public String readLine() throws IOException {
         String linea = null;
         return linea;
