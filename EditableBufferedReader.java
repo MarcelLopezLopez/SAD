@@ -13,6 +13,7 @@ class EditableBufferedReader extends BufferedReader {
     static final int DEL = 51; //Tecla supr Printea ^[[3~, utilitzarem el 3
     static final int BPSK = 127; //Tecla <-- backspace, te numero en ASCII
     static final int INSERT = 50; //Tecla insert Printea ^[[2~, utilitzarem el 2
+    static final int ENTER = 13; //Útil per saber quan s'introdueix un CR i hem d'acabar
    
     static final int VIRGULILLA = 126; //Útil per fer DEL e INSERT, ja que cal "~"
     static final int ESC = 27; //Útil per fer les fletxes, ja que ens cal "^["
@@ -108,6 +109,12 @@ class EditableBufferedReader extends BufferedReader {
 
     public String readLine() throws IOException {
         String linea = null;
+        int lectura = 0;
+
+        lectura = read();
+        while(lectura != ENTER){
+            linea.se
+        }
         return linea;
     }
 }
