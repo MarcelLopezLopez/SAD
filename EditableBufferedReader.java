@@ -113,7 +113,7 @@ class EditableBufferedReader extends BufferedReader {
 
         lectura = read();
         while(lectura != ENTER){
-            linea.se
+            linea.sea
         }
         return linea;
     }
