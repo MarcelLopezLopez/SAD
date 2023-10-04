@@ -31,13 +31,21 @@ public class Line {
     }
 
     public void dreta(){
-        this.pos ++;
+        if(this.pos < this.linia.size()){
+            this.pos ++;
+        } else {
+            //Fem sonar la campana 
+            //Provar si fiquem 'u\001'
+            System.out.print('\007');
+        }
     }
 
     public void esquerra(){
         if(this.pos > 0){
             this.pos--;
         } else {
+            //Fem sonar la campana
+            //Provar si fiquem 'u\001'
             System.out.print('\007');
         }
     }
