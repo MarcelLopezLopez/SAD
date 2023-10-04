@@ -47,7 +47,7 @@ class EditableBufferedReader extends BufferedReader {
         } 
     }
     public void unsetRaw() throws IOException {
-        //Passar de mode Cooked a mode Raw
+        //Passar de mode Raw a mode Cooked
         //String amb la seqüència necessaria per canviar de mode Raw a mode Cooked al terminal
         String[] modeCooked = {"/bin/sh", "-c", "stty cooked <dev/tty"};
         try{
