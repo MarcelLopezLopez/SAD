@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Observer;
 
 public class Line {
     
@@ -27,5 +28,17 @@ public class Line {
 
     public void end(){
         this.pos = this.linia.size();
+    }
+
+    public void dreta(){
+        this.pos ++;
+    }
+
+    public void esquerra(){
+        if(this.pos > 0){
+            this.pos--;
+        } else {
+            System.out.print('\007');
+        }
     }
 }
