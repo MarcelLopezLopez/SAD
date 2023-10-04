@@ -80,7 +80,7 @@ class EditableBufferedReader extends BufferedReader {
                     case FINAL:
                         return RET_FINAL;
                     case INSERT:
-                        //Mirem si el car`zcter enviat és ~
+                        //Mirem si el caràcter enviat és ~
                         if(super.read() == VIRGULILLA){
                             return RTE_INSERT;
                         }

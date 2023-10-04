@@ -7,9 +7,25 @@ public class Line {
     private boolean insert;
     private ArrayList<Character> linia;
 
-    Line(){
+    public Line(){
         this.pos = 0;
         this.insert = true;
         this.linia = new ArrayList<Character>();
+    }
+
+    public int getPos(){
+        return this.pos;
+    }
+
+    public void setPos(int posicio){
+        this.pos = posicio;
+    }
+
+    public void start(){
+        this.pos = 0;
+    }
+
+    public void end(){
+        this.pos = this.linia.size();
     }
 }
