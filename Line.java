@@ -37,7 +37,7 @@ public class Line {
             this.pos ++;
         } else {
             //Fem sonar la campana 
-            //Provar si fiquem 'u\001'
+            //Provar si fiquem 'u\0007'
             System.out.print('\007');
         }
     }
