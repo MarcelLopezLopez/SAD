@@ -28,10 +28,14 @@ class EditableBufferedReader extends BufferedReader {
     static final int RET_FINAL = 259;
     static final int RET_DEL = 260;
     static final int RTE_INSERT = 261;
+
+    //Varibale per poder usar metodes de la classe Line()
+    Line line;
     
 
     EditableBufferedReader(InputStreamReader in){
         super(in);
+        this.line = new Line();
     }
     public void setRaw() throws IOException {
         //Passar de mode Cooked a mode Raw
@@ -111,10 +115,41 @@ class EditableBufferedReader extends BufferedReader {
         String linea = null;
         int lectura = 0;
 
-        lectura = read();
-        while(lectura != ENTER){
-            linea.sea
+        //Ens fiquem en mode raw perque funcioni el programa i poder llegir la linea correctament
+        this.setRaw();
+
+        while((lectura = this.read()) != ENTER){
+            switch(lectura){
+                case RET_DRETA:
+                    this.line.dreta();
+                break;
+                case RET_ESQUERRA:
+                    this.line.esquerra();
+                break;
+                case RET_INICI:
+                    this.line.start();
+                break;
+                case RET_FINAL:
+                    this.line.end();
+                break;
+                case RET_DEL:
+                    this.line.del();
+                break;
+                case RTE_INSERT:
+                    this.line.ins();
+                break;
+                case BPSK:
+                    this.line.bksp();
+                break;
+                default:
+                    //Per convertir el int llegit a un char utilitzem (char) int
+                    this.line.add((char) lectura);
+                break;
+            }
         }
+        //Tornem al mode per defecte de la consola
+        this.unsetRaw();
+        linea = line.toString();
         return linea;
     }
 }
