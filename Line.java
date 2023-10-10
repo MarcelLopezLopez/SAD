@@ -33,7 +33,6 @@ public class Line {
     public void dreta(){
         if(this.pos < this.linia.size()){
             this.pos ++;
-            System.out.print("\u001b[1C");
         } else {
             //Fem sonar la campana 
             //Provar si fiquem 'u\0007'
@@ -44,7 +43,6 @@ public class Line {
     public void esquerra(){
         if(this.pos > 0){
             this.pos--;
-            System.out.print("\u001b[1D");
         } else {
             System.out.print('\007');
         }
