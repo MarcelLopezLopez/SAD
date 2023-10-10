@@ -122,11 +122,11 @@ class EditableBufferedReader extends BufferedReader {
             switch(lectura){
                 case RET_DRETA:
                     this.line.dreta();
-                    System.out.print("\u001b[1C");
+                    System.out.print("\033[C");
                 break;
                 case RET_ESQUERRA:
                     this.line.esquerra();
-                    System.out.print("\u001b[1D");
+                    System.out.print("\033[D");
                 break;
                 case RET_INICI:
                     this.line.start();
