@@ -134,12 +134,14 @@ class EditableBufferedReader extends BufferedReader {
                 break;
                 case RET_DEL:
                     this.line.del();
+                    System.out.print("\u001b[1P");
                 break;
                 case RTE_INSERT:
                     this.line.ins();
                 break;
                 case BPSK:
                     this.line.bksp();
+                    System.out.print("\033[D\033[P");
                 break;
                 default:
                     //Per convertir el int llegit a un char utilitzem (char) int
