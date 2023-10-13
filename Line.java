@@ -21,15 +21,19 @@ public class Line {
     }
 
     public int start(){
+        int aux = pos;
         //Ens movem al inici
         this.pos = 0;
         //Retornem el numero de valors que s'ha de desplaçar per arribar al inici
-        return pos;
+        return aux;
     }
 
-    public void end(){
+    public int end(){
+        int aux = pos;
         //Ens movem al final
         this.pos = this.linia.size();
+        //Retornem el numero de valors que s'ha de desplaçar cap a la dreta
+        return (this.line.size() - pos);
     }
 
     public void dreta(){
