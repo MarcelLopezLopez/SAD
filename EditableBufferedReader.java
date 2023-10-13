@@ -140,12 +140,19 @@ class EditableBufferedReader extends BufferedReader {
                 break;
                 case RET_DEL:
                     this.line.del();
+                    //Borrem caracter a la dreta per fer-ho:
+                    //Movem el cursor a la posicio de la dreta
+                    System.out.print("\u001b[1C");
+                    //Borrem el caracter de la esquerra (el de la dreta al inici)
+                    System.out.print("\b");
                 break;
                 case RTE_INSERT:
                     this.line.ins();
                 break;
                 case BPSK:
                     this.line.bksp();
+                    //Borrem el caracter de l'esquerra
+                    System.out.print("\b");
                 break;
                 default:
                     //Per convertir el int llegit a un char utilitzem (char) int
