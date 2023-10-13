@@ -20,9 +20,11 @@ public class Line {
         this.pos = posicio;
     }
 
-    public void start(){
+    public int start(){
         //Ens movem al inici
         this.pos = 0;
+        //Retornem el numero de valors que s'ha de desplaçar per arribar al inici
+        return pos;
     }
 
     public void end(){
