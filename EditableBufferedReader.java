@@ -53,7 +53,7 @@ class EditableBufferedReader extends BufferedReader {
     public void unsetRaw() throws IOException {
         //Passar de mode Raw a mode Cooked
         //String amb la seqüència necessaria per canviar de mode Raw a mode Cooked al terminal
-        String[] modeCooked = {"/bin/sh", "-c", "stty -echo cooked <dev/tty"};
+        String[] modeCooked = {"/bin/sh", "-c", "stty echo cooked <dev/tty"};
         try{
             //getRuntime().exec() serveix per poder executar la linea de comandes
             //waitFor() espera hasta que el subproceso termine
