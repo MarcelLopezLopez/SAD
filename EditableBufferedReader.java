@@ -31,7 +31,6 @@ class EditableBufferedReader extends BufferedReader {
 
     //Varibale per poder usar metodes de la classe Line()
     Line line;
-    
 
     EditableBufferedReader(InputStreamReader in){
         super(in);
@@ -112,39 +111,46 @@ class EditableBufferedReader extends BufferedReader {
     }
 
     public String readLine() throws IOException {
-        String linea = null;
         int lectura = 0;
+        int aux;
 
         //Ens fiquem en mode raw perque funcioni el programa i poder llegir la linea correctament
         this.setRaw();
 
+        //Borrem pantalla per veure el programa mes net
+        System.out.print("\u001b[2J");
+
         while((lectura = this.read()) != ENTER){
             switch(lectura){
                 case RET_DRETA:
-                    this.line.dreta();
-                    System.out.print("\u001b[1C");
+                    if(this.line.dreta()){
+                        System.out.print("\u001b[1C");
+                    }
                 break;
                 case RET_ESQUERRA:
-                    this.line.esquerra();
-                    System.out.print("\u001b[1D");
+                    if(this.line.esquerra()){
+                        System.out.print("\u001b[1D");
+                    }
                 break;
                 case RET_INICI:
-                    int aux1 = this.line.start();
+                aux = this.line.start();
                     //Anem al inici, movent-nos cap a l'esquerra les posicions del cursor retornat
-                    System.out.print("\u001b[" + aux1 + "D");
+                    System.out.print("\u001b[" + aux + "D");
                 break;
                 case RET_FINAL:
-                    int aux2 = this.line.end();
+                    int aux = this.line.end();
                     //Anem al final, movent-nos cap a la dreta les posicions del cursor retornat
-                    System.out.print("\u001b[" + aux2 + "C");
+                    System.out.print("\u001b[" + aux + "C");
                 break;
                 case RET_DEL:
                     this.line.del();
-                    //Borrem caracter a la dreta per fer-ho:
-                    //Movem el cursor a la posicio de la dreta
-                    System.out.print("\u001b[1C");
-                    //Borrem el caracter de la esquerra (el de la dreta al inici)
-                    System.out.print("\b \b");
+                    System.out.print("\u001b[2K");
+                    //Ens situem en la priemra fila i primera columna del terminal
+                    System.out.print("\u001b[0;0H");
+                    //Printegem la linea
+                    System.out.print(line.toString());
+                    //Situem en cursor on estem escribint
+                    System.out.print("\u001b[0;" + (line.getPos()+1) + "H");
                 break;
                 case RTE_INSERT:
                     this.line.ins();
@@ -152,18 +158,31 @@ class EditableBufferedReader extends BufferedReader {
                 case BPSK:
                     this.line.bksp();
                     //Borrem el caracter de l'esquerra
-                    System.out.print("\b \b");
+                    System.out.print("\u001b[2K");
+                    //Ens situem en la priemra fila i primera columna del terminal
+                    System.out.print("\u001b[0;0H");
+                    //Printegem la linea
+                    System.out.print(line.toString());
+                    //Situem en cursor on estem escribint
+                    System.out.print("\u001b[0;" + (line.getPos()+1) + "H");
                 break;
                 default:
                     //Per convertir el int llegit a un char utilitzem (char) int
-                    this.line.add((char) lectura);
-                    System.out.print((char) lectura);
+                    aux = this.line.add((char) lectura);
+                    //Borrem la pantalla
+                    System.out.print("\u001b[2K");
+                    //Ens situem en la priemra fila i primera columna del terminal
+                    System.out.print("\u001b[0;0H");
+                    //Printegem la linea
+                    System.out.print(line.toString());
+                    //Situem en cursor on estem escribint
+                    System.out.print("\u001b[0;" + aux + "H");
                 break;
             }
         }
         //Tornem al mode per defecte de la consola
         this.unsetRaw();
-        linea = line.toString();
-        return linea;
+        System.out.print("stty echo");
+        return line.toString();
     }
 }

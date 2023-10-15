@@ -36,21 +36,25 @@ public class Line {
         return (this.linia.size() - aux);
     }
 
-    public void dreta(){
+    public boolean dreta(){
         if(this.pos < this.linia.size()){
             this.pos ++;
+            return true;
         } else {
             //Fem sonar la campana 
             //Provar si fiquem 'u\0007'
             System.out.print('\007');
+            return false;
         }
     }
 
-    public void esquerra(){
+    public boolean esquerra(){
         if(this.pos > 0){
             this.pos--;
+            return true;
         } else {
             System.out.print('\007');
+            return false;
         }
     }
 
@@ -77,7 +81,7 @@ public class Line {
         insert = !insert;
     }
 
-    public void add(char c){
+    public int add(char c){
         //Mirem si estem en mode insercio
         if(insert){
             this.linia.add(pos, c);
@@ -91,6 +95,7 @@ public class Line {
             }
         }
         this.dreta();
+        return (this.pos + 1);
     }
 
     public String toString(){
