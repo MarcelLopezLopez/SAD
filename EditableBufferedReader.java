@@ -129,14 +129,14 @@ class EditableBufferedReader extends BufferedReader {
                     System.out.print("\u001b[1D");
                 break;
                 case RET_INICI:
-                    int aux = this.line.start();
+                    int aux1 = this.line.start();
                     //Anem al inici, movent-nos cap a l'esquerra les posicions del cursor retornat
-                    System.out.print("\u001b[" + aux + "D");
+                    System.out.print("\u001b[" + aux1 + "D");
                 break;
                 case RET_FINAL:
-                    int aux = this.line.end();
+                    int aux2 = this.line.end();
                     //Anem al final, movent-nos cap a la dreta les posicions del cursor retornat
-                    System.out.print("\u001b[" + aux + "C");
+                    System.out.print("\u001b[" + aux2 + "C");
                 break;
                 case RET_DEL:
                     this.line.del();
@@ -144,7 +144,7 @@ class EditableBufferedReader extends BufferedReader {
                     //Movem el cursor a la posicio de la dreta
                     System.out.print("\u001b[1C");
                     //Borrem el caracter de la esquerra (el de la dreta al inici)
-                    System.out.print("\b");
+                    System.out.print("\b \b");
                 break;
                 case RTE_INSERT:
                     this.line.ins();
@@ -152,11 +152,12 @@ class EditableBufferedReader extends BufferedReader {
                 case BPSK:
                     this.line.bksp();
                     //Borrem el caracter de l'esquerra
-                    System.out.print("\b");
+                    System.out.print("\b \b");
                 break;
                 default:
                     //Per convertir el int llegit a un char utilitzem (char) int
                     this.line.add((char) lectura);
+                    System.out.print((char) lectura);
                 break;
             }
         }

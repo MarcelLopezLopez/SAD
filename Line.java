@@ -33,7 +33,7 @@ public class Line {
         //Ens movem al final
         this.pos = this.linia.size();
         //Retornem el numero de valors que s'ha de desplaçar cap a la dreta
-        return (this.line.size() - pos);
+        return (this.linia.size() - aux);
     }
 
     public void dreta(){
