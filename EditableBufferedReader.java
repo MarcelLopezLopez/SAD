@@ -11,7 +11,7 @@ class EditableBufferedReader extends BufferedReader {
     static final int INICI = 72; //Tecla inicio Printea ^[[H, utilitzarem la H
     static final int FINAL = 70; //Tecla fin Printea ^[[F, utilitzarem la F
     static final int DEL = 51; //Tecla supr Printea ^[[3~, utilitzarem el 3
-    static final int BPSK = 127; //Tecla <-- backspace, te numero en ASCII
+    static final int BPSK = 127; //Tecla <-- backspace, te numero en ASCII, no caldria ja que exixsteix
     static final int INSERT = 50; //Tecla insert Printea ^[[2~, utilitzarem el 2
     static final int ENTER = 13; //Útil per saber quan s'introdueix un CR i hem d'acabar
    
