@@ -133,12 +133,12 @@ class EditableBufferedReader extends BufferedReader {
                     }
                 break;
                 case RET_INICI:
-                aux = this.line.start();
+                    aux = this.line.start();
                     //Anem al inici, movent-nos cap a l'esquerra les posicions del cursor retornat
                     System.out.print("\u001b[" + aux + "D");
                 break;
                 case RET_FINAL:
-                    int aux = this.line.end();
+                    aux = this.line.end();
                     //Anem al final, movent-nos cap a la dreta les posicions del cursor retornat
                     System.out.print("\u001b[" + aux + "C");
                 break;
