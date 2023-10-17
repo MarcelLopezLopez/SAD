@@ -182,7 +182,7 @@ class EditableBufferedReader extends BufferedReader {
         }
         //Tornem al mode per defecte de la consola
         this.unsetRaw();
-        System.out.print("stty echo");
+
         return line.toString();
     }
 }
