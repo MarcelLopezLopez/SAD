@@ -99,9 +99,6 @@ class EditableBufferedReader extends BufferedReader {
                         return -1;
                 }
             }
-        //Especifiquem el cas del BPSK valor 127 (tecla espai)
-        } else if (lectura == BPSK) {
-            return BPSK;
         //Si s'introdueix un caràcter comú el retornem
         } else {
             return lectura;
