@@ -41,8 +41,7 @@ public class Line {
             this.pos ++;
             return true;
         } else {
-            //Fem sonar la campana 
-            //Provar si fiquem 'u\0007'
+            //Fem sonar la campana, ho hem de fer a readLine()
             System.out.print('\007');
             return false;
         }

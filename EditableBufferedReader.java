@@ -154,6 +154,8 @@ class EditableBufferedReader extends BufferedReader {
                 break;
                 case BPSK:
                     this.line.bksp();
+                    //System.out.print("\u001b[1D");
+                    //System.out.print("\u001b[P");
                     //Borrem el caracter de l'esquerra
                     System.out.print("\u001b[2K");
                     //Ens situem en la priemra fila i primera columna del terminal
