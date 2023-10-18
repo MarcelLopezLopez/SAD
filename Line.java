@@ -41,8 +41,6 @@ public class Line {
             this.pos ++;
             return true;
         } else {
-            //Fem sonar la campana, ho hem de fer a readLine()
-            System.out.print('\007');
             return false;
         }
     }
@@ -52,27 +50,28 @@ public class Line {
             this.pos--;
             return true;
         } else {
-            System.out.print('\007');
             return false;
         }
     }
 
-    public void bksp(){
+    public boolean bksp(){
         //Borrem la posicio de l'esquerra del cursor
         if(!linia.isEmpty()){
             this.linia.remove(this.pos - 1);
             this.esquerra();
+            return true;
         } else {
-            System.out.print('\007');
+            return false;
         }
     }
 
-    public void del(){
+    public boolean del(){
         //Borrem la posicio de la dreta del cursor
         if(this.pos < this.linia.size() && !linia.isEmpty()){
             this.linia.remove(this.pos);
+            return true;
         } else {
-            System.out.print('\007');
+            return false;
         }
     }
 

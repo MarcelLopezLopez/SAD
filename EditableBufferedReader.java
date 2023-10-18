@@ -122,11 +122,15 @@ class EditableBufferedReader extends BufferedReader {
                 case RET_DRETA:
                     if(this.line.dreta()){
                         System.out.print("\u001b[1C");
+                    } else {
+                        System.out.print('\007');
                     }
                 break;
                 case RET_ESQUERRA:
                     if(this.line.esquerra()){
                         System.out.print("\u001b[1D");
+                    } else {
+                        System.out.print('\007');
                     }
                 break;
                 case RET_INICI:
@@ -140,30 +144,36 @@ class EditableBufferedReader extends BufferedReader {
                     System.out.print("\u001b[" + aux + "C");
                 break;
                 case RET_DEL:
-                    this.line.del();
-                    System.out.print("\u001b[2K");
-                    //Ens situem en la priemra fila i primera columna del terminal
-                    System.out.print("\u001b[0;0H");
-                    //Printegem la linea
-                    System.out.print(line.toString());
-                    //Situem en cursor on estem escribint
-                    System.out.print("\u001b[0;" + (line.getPos()+1) + "H");
+                    if(this.line.del()){
+                        System.out.print("\u001b[2K");
+                        //Ens situem en la priemra fila i primera columna del terminal
+                        System.out.print("\u001b[0;0H");
+                        //Printegem la linea
+                        System.out.print(line.toString());
+                        //Situem en cursor on estem escribint
+                        System.out.print("\u001b[0;" + (line.getPos()+1) + "H");
+                    } else {
+                        System.out.print('\007');
+                    }
                 break;
                 case RTE_INSERT:
                     this.line.ins();
                 break;
                 case BPSK:
-                    this.line.bksp();
-                    //System.out.print("\u001b[1D");
-                    //System.out.print("\u001b[P");
-                    //Borrem el caracter de l'esquerra
-                    System.out.print("\u001b[2K");
-                    //Ens situem en la priemra fila i primera columna del terminal
-                    System.out.print("\u001b[0;0H");
-                    //Printegem la linea
-                    System.out.print(line.toString());
-                    //Situem en cursor on estem escribint
-                    System.out.print("\u001b[0;" + (line.getPos()+1) + "H");
+                    if(this.line.bksp()){
+                        //System.out.print("\u001b[1D");
+                        //System.out.print("\u001b[P");
+                        //Borrem el caracter de l'esquerra
+                        System.out.print("\u001b[2K");
+                        //Ens situem en la priemra fila i primera columna del terminal
+                        System.out.print("\u001b[0;0H");
+                        //Printegem la linea
+                        System.out.print(line.toString());
+                        //Situem en cursor on estem escribint
+                        System.out.print("\u001b[0;" + (line.getPos()+1) + "H");
+                    } else {
+                        System.out.print('\007');
+                    }
                 break;
                 default:
                     //Per convertir el int llegit a un char utilitzem (char) int
