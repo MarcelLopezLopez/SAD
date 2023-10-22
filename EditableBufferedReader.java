@@ -29,12 +29,8 @@ class EditableBufferedReader extends BufferedReader {
     static final int RET_DEL = 260;
     static final int RTE_INSERT = 261;
 
-    //Varibale per poder usar metodes de la classe Line()
-    Line line;
-
     EditableBufferedReader(InputStreamReader in){
         super(in);
-        this.line = new Line();
     }
     public void setRaw() throws IOException {
         //Passar de mode Cooked a mode Raw
@@ -110,82 +106,64 @@ class EditableBufferedReader extends BufferedReader {
     public String readLine() throws IOException {
         int lectura = 0;
         int aux;
+        
+        //Varibale per poder usar metodes de la classe Line()
+        Line line = new Line();
 
         //Ens fiquem en mode raw perque funcioni el programa i poder llegir la linea correctament
         this.setRaw();
 
-        //Borrem pantalla per veure el programa mes net
-        System.out.print("\u001b[2J");
-
         while((lectura = this.read()) != ENTER){
             switch(lectura){
                 case RET_DRETA:
-                    if(this.line.dreta()){
-                        System.out.print("\u001b[1C");
+                    if(line.dreta()){
+                        System.out.print("\033[C");
                     } else {
                         System.out.print('\007');
                     }
                 break;
                 case RET_ESQUERRA:
-                    if(this.line.esquerra()){
-                        System.out.print("\u001b[1D");
+                    if(line.esquerra()){
+                        System.out.print("\033[D");
                     } else {
                         System.out.print('\007');
                     }
                 break;
                 case RET_INICI:
-                    aux = this.line.start();
+                    aux = line.start();
                     //Anem al inici, movent-nos cap a l'esquerra les posicions del cursor retornat
-                    System.out.print("\u001b[" + aux + "D");
+                    System.out.print("\033[" + aux + "D");
                 break;
                 case RET_FINAL:
-                    aux = this.line.end();
+                    aux = line.end();
                     //Anem al final, movent-nos cap a la dreta les posicions del cursor retornat
-                    System.out.print("\u001b[" + aux + "C");
+                    System.out.print("\033[" + aux + "C");
                 break;
                 case RET_DEL:
-                    if(this.line.del()){
-                        System.out.print("\u001b[2K");
-                        //Ens situem en la priemra fila i primera columna del terminal
-                        System.out.print("\u001b[0;0H");
-                        //Printegem la linea
-                        System.out.print(line.toString());
-                        //Situem en cursor on estem escribint
-                        System.out.print("\u001b[0;" + (line.getPos()+1) + "H");
+                    if(line.del()){
+                        //Borrem el caracter de l'esquerra
+                        System.out.print("\033[P");
                     } else {
                         System.out.print('\007');
                     }
                 break;
                 case RTE_INSERT:
-                    this.line.ins();
+                    line.ins();
                 break;
                 case BPSK:
-                    if(this.line.bksp()){
-                        //System.out.print("\u001b[1D");
-                        //System.out.print("\u001b[P");
+                    if(line.bksp()){
+                        //Ens desplacem cap a la dreta
+                        System.out.print("\033[D");
                         //Borrem el caracter de l'esquerra
-                        System.out.print("\u001b[2K");
-                        //Ens situem en la priemra fila i primera columna del terminal
-                        System.out.print("\u001b[0;0H");
-                        //Printegem la linea
-                        System.out.print(line.toString());
-                        //Situem en cursor on estem escribint
-                        System.out.print("\u001b[0;" + (line.getPos()+1) + "H");
+                        System.out.print("\033[P");
                     } else {
                         System.out.print('\007');
                     }
                 break;
                 default:
                     //Per convertir el int llegit a un char utilitzem (char) int
-                    aux = this.line.add((char) lectura);
-                    //Borrem la pantalla
-                    System.out.print("\u001b[2K");
-                    //Ens situem en la priemra fila i primera columna del terminal
-                    System.out.print("\u001b[0;0H");
-                    //Printegem la linea
-                    System.out.print(line.toString());
-                    //Situem en cursor on estem escribint
-                    System.out.print("\u001b[0;" + aux + "H");
+                    aux = line.add((char) lectura);
+                    System.out.print((char) lectura);
                 break;
             }
         }
