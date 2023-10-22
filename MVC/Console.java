@@ -12,4 +12,8 @@ public class Console {
     public void move(String s){
         System.out.print("\033[" + s);
     }
+
+    public void escribir(char c){
+        System.out.print(c);
+    }
 }

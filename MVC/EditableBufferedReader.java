@@ -122,15 +122,15 @@ public class EditableBufferedReader extends BufferedReader{
                 break;
                 case RET_INICI:
                     aux = line.start();
-                    System.out.print("\033[" + aux + "D");
+                    consola.move(aux + "D");
                 break;
                 case RET_FINAL:
                     aux = line.end();
-                    System.out.print("\033[" + aux + "C");
+                    consola.move(aux + "C");
                 break;
                 case RET_DEL:
                     if(line.del()){
-                        System.out.print("\033[P");
+                        consola.move("P");
                     } else {
                         consola.campana();;
                     }
@@ -140,8 +140,8 @@ public class EditableBufferedReader extends BufferedReader{
                 break;
                 case BPSK:
                     if(line.bksp()){
-                        System.out.print("\033[D");
-                        System.out.print("\033[P");
+                        consola.move("D");
+                        consola.move("P");
                     } else {
                         consola.campana();;
                     }
@@ -149,7 +149,7 @@ public class EditableBufferedReader extends BufferedReader{
                 default:
                     //Per convertir el int llegit a un char utilitzem (char) int
                     aux = line.add((char) lectura);
-                    System.out.print((char) lectura);
+                    consola.escribir((char) lectura);
                 break;
             }
         }
