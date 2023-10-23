@@ -80,7 +80,7 @@ public class Line {
         insert = !insert;
     }
 
-    public int add(char c){
+    public boolean add(char c){
         //Mirem si estem en mode insercio
         if(insert){
             this.linia.add(pos, c);
@@ -94,7 +94,7 @@ public class Line {
             }
         }
         this.dreta();
-        return (this.pos + 1);
+        return insert;
     }
 
     public String toString(){

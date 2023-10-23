@@ -22,12 +22,12 @@ class EditableBufferedReader extends BufferedReader {
     //Definim els valors a retornar per la funció read, escollim valors a partir del
     //256, ja que son valors lliures a la taula ASCII, no definim BPSK, ja que es un 
     //valor existent i el podem retornar a ell mateix
-    static final int RET_DRETA = 256;
-    static final int RET_ESQUERRA = 257;
-    static final int RET_INICI = 258;
-    static final int RET_FINAL = 259;
-    static final int RET_DEL = 260;
-    static final int RTE_INSERT = 261;
+    static final int RET_DRETA = -1;
+    static final int RET_ESQUERRA = -2;
+    static final int RET_INICI = -3;
+    static final int RET_FINAL = -4;
+    static final int RET_DEL = -5;
+    static final int RTE_INSERT = -6;
 
     EditableBufferedReader(InputStreamReader in){
         super(in);
@@ -149,6 +149,7 @@ class EditableBufferedReader extends BufferedReader {
                 break;
                 case RTE_INSERT:
                     line.ins();
+                    System.out.print("\033[4l");
                 break;
                 case BPSK:
                     if(line.bksp()){
@@ -162,7 +163,10 @@ class EditableBufferedReader extends BufferedReader {
                 break;
                 default:
                     //Per convertir el int llegit a un char utilitzem (char) int
-                    aux = line.add((char) lectura);
+                    boolean insert = line.add((char) lectura);
+                    if(insert){
+                        System.out.print("\033[4h");
+                    }
                     System.out.print((char) lectura);
                 break;
             }

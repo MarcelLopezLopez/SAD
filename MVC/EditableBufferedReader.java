@@ -18,12 +18,12 @@ public class EditableBufferedReader extends BufferedReader{
     static final int ESC = 27; 
     static final int CORXET = 91;
 
-    static final int RET_DRETA = 256;
-    static final int RET_ESQUERRA = 257;
-    static final int RET_INICI = 258;
-    static final int RET_FINAL = 259;
-    static final int RET_DEL = 260;
-    static final int RTE_INSERT = 261;
+    static final int RET_DRETA = -1;
+    static final int RET_ESQUERRA = -2;
+    static final int RET_INICI = -3;
+    static final int RET_FINAL = -4;
+    static final int RET_DEL = -5;
+    static final int RTE_INSERT = -6;
 
     //Variable per poder usar els metodes de la classe Console()
     Console consola;
@@ -137,6 +137,7 @@ public class EditableBufferedReader extends BufferedReader{
                 break;
                 case RTE_INSERT:
                     line.ins();
+                    consola.modeInsertar();
                 break;
                 case BPSK:
                     if(line.bksp()){
@@ -148,7 +149,10 @@ public class EditableBufferedReader extends BufferedReader{
                 break;
                 default:
                     //Per convertir el int llegit a un char utilitzem (char) int
-                    aux = line.add((char) lectura);
+                    boolean insert = line.add((char) lectura);
+                    if(insert){
+                        consola.modeNormal();
+                    }
                     consola.escribir((char) lectura);
                 break;
             }
