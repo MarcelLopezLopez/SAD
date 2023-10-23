@@ -32,6 +32,7 @@ class EditableBufferedReader extends BufferedReader {
     EditableBufferedReader(InputStreamReader in){
         super(in);
     }
+
     public void setRaw() throws IOException {
         //Passar de mode Cooked a mode Raw
         //String amb la seqüència necessaria per canviar de mode Cooked a mode Raw al terminal i treutre l'echo
@@ -45,6 +46,7 @@ class EditableBufferedReader extends BufferedReader {
             System.out.println("Error");
         } 
     }
+    
     public void unsetRaw() throws IOException {
         //Passar de mode Raw a mode Cooked
         //String amb la seqüència necessaria per canviar de mode Raw a mode Cooked al terminal

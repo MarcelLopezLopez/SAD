@@ -22,6 +22,6 @@ public class Console {
     }
 
     public void modeNormal(){
-        System.out.print("\033[4l");
+        System.out.print("\033[4h");
     }
 }
