@@ -41,7 +41,7 @@ public class EditableBufferedReader extends BufferedReader{
         } 
     }
     public void unsetRaw() throws IOException {
-        String[] modeCooked = {"/bin/sh", "-c", "stty echo cooked <dev/tty"};
+        String[] modeCooked = {"/bin/sh", "-c", "stty echo cooked </dev/tty"};
         try{
             Runtime.getRuntime().exec(modeCooked).waitFor();
         } catch (IOException | InterruptedException e){
