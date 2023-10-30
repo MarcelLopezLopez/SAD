@@ -27,10 +27,14 @@ public class EditableBufferedReader extends BufferedReader{
 
     //Variable per poder usar els metodes de la classe Console()
     Console consola;
+    //Varibale per poder usar metodes de la classe Line()
+    Line line;
 
     EditableBufferedReader(InputStreamReader in){
         super(in);
         this.consola = new Console();
+        this.line = new Line();
+        line.addObserver(consola);
     }
     public void setRaw() throws IOException {
         String [] modeRaw = {"/bin/sh", "-c", "stty -echo raw </dev/tty"};
@@ -98,8 +102,6 @@ public class EditableBufferedReader extends BufferedReader{
     public String readLine() throws IOException {
         int lectura = 0;
         int aux;
-        //Varibale per poder usar metodes de la classe Line()
-        Line line = new Line();
 
         //Ens fiquem en mode raw perque funcioni el programa i poder llegir la linea correctament
         this.setRaw();
